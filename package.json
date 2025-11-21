@@ -1,0 +1,28 @@
+{
+  "name": "hillel-my-js-playwright-homeworks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Olena-Salnikova/hillel-my-js-playwright-homeworks.git"
+  },
+  "keywords": [],
+  "author": "Olena Salnikova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Olena-Salnikova/hillel-my-js-playwright-homeworks/issues"
+  },
+  "homepage": "https://github.com/Olena-Salnikova/hillel-my-js-playwright-homeworks#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.1",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0"
+  }
+}

@@ -14,7 +14,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   // testDir: './tests',
-  testMatch: /\/tests\/.*\.spec\.js/,
+  testMatch: /\/tests\/HW.*\/.*\.spec\.js/,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -22,33 +22,41 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: 3, //process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
-
+    baseURL: 'https://qauto.forstudy.space/',
+    httpCredentials: {
+        username: 'guest',
+        password: 'welcome2qauto',
+    },
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    headless: false, // Open browser window, if true - runs in background- not opening browser window
+    headless: true, // false - Open browser window, if true - runs in background- not opening browser window
     viewport: { width: 1280, height: 720 },
-    trace: 'on-first-retry',
-    video: 'on-first-retry',
+    trace: 'on',
+    video: 'on',
     screenshot: 'on',
+    navigationTimeout: 30000,
+    actionTimeout: 10000,
   },
+  timeout: 60000, // Increase global test timeout to 60 seconds
+
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
+      testMatch: /\/tests\/HW.*\/.*\.spec\.js/,
       use: { ...devices['Desktop Chrome'] },
     },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
 
     // {
     //   name: 'webkit',

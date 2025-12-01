@@ -5,6 +5,7 @@ import { Registration } from "../../src/pageObjects/main/Registration";
 
 test.describe("Registration form (POM)", () => {
     const prefix = "qauto_os";
+    let reg;
 
     const userData = {
         name: faker.person.firstName(),
@@ -18,13 +19,12 @@ test.describe("Registration form (POM)", () => {
 
     test.beforeEach(async ({ page }) => {
         const home = new MainPage(page);
-        await home.open();
+        await home.navigate();
         await home.openSignupPopup();
+        reg = new Registration(page);
     });
 
     test("Positive: register new user with valid data", async ({ page }) => {
-        const reg = new Registration(page);
-
         await reg.fillRegistrationForm({
             name: userData.name,
             lastName: userData.lastName,
@@ -38,9 +38,7 @@ test.describe("Registration form (POM)", () => {
         await expect(page).toHaveURL("/panel/garage");
     });
 
-    test("Negative: empty first name", async ({ page }) => {
-        const reg = new Registration(page);
-
+    test("Negative: empty first name", async () => {
         await reg.name.fill("");
         await reg.name.blur();
 
@@ -48,9 +46,7 @@ test.describe("Registration form (POM)", () => {
         await expect(reg.error).toContainText("Name required");
     });
 
-    test("Negative: empty last name", async ({ page }) => {
-        const reg = new Registration(page);
-
+    test("Negative: empty last name", async () => {
         await reg.lastName.fill("");
         await reg.lastName.blur();
 
@@ -58,9 +54,7 @@ test.describe("Registration form (POM)", () => {
         await expect(reg.error).toContainText("Last name required");
     });
 
-    test("Negative: empty email", async ({ page }) => {
-        const reg = new Registration(page);
-
+    test("Negative: empty email", async () => {
         await reg.email.fill("");
         await reg.email.blur();
 
@@ -68,9 +62,7 @@ test.describe("Registration form (POM)", () => {
         await expect(reg.error).toContainText("Email required");
     });
 
-    test("Negative: invalid email format", async ({ page }) => {
-        const reg = new Registration(page);
-
+    test("Negative: invalid email format", async () => {
         await reg.email.fill("invalid_email");
         await reg.email.blur();
 
@@ -78,9 +70,7 @@ test.describe("Registration form (POM)", () => {
         await expect(reg.error).toContainText("Email is incorrect");
     });
 
-    test("Negative: password too short", async ({ page }) => {
-        const reg = new Registration(page);
-
+    test("Negative: password too short", async () => {
         await reg.password.fill("Aa1");
         await reg.password.blur();
 
@@ -88,9 +78,7 @@ test.describe("Registration form (POM)", () => {
         await expect(reg.error).toContainText("Password has to be from 8 to 15 characters long");
     });
 
-    test("Negative: passwords do not match", async ({ page }) => {
-        const reg = new Registration(page);
-
+    test("Negative: passwords do not match", async () => {
         await reg.password.fill(userData.password);
         await reg.repeatPassword.fill("Aa111111");
         await reg.repeatPassword.blur();
@@ -99,9 +87,7 @@ test.describe("Registration form (POM)", () => {
         await expect(reg.error).toContainText("Passwords do not match");
     });
 
-    test("Negative: last name too short", async ({ page }) => {
-        const reg = new Registration(page);
-
+    test("Negative: last name too short", async () => {
         await reg.lastName.fill("A");
         await reg.lastName.blur();
 
@@ -109,9 +95,7 @@ test.describe("Registration form (POM)", () => {
         await expect(reg.error).toContainText("Last name has to be from 2 to 20 characters long");
     });
 
-    test("Negative: first name too long", async ({ page }) => {
-        const reg = new Registration(page);
-
+    test("Negative: first name too long", async () => {
         await reg.name.fill("A".repeat(30));
         await reg.name.blur();
 
@@ -119,9 +103,7 @@ test.describe("Registration form (POM)", () => {
         await expect(reg.error).toContainText("Name has to be from 2 to 20 characters long");
     });
 
-    test("Negative: email already exists", async ({ page }) => {
-        const reg = new Registration(page);
-
+    test("Negative: email already exists", async () => {
         await reg.fillRegistrationForm({
             name: userData.name,
             lastName: userData.lastName,

@@ -1,4 +1,4 @@
-export class Registration {
+export class RegistrationPopup {
     constructor(page) {
         this.page = page;
 

@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { faker } from "@faker-js/faker";
-import { MainPage } from "../../src/pageObjects/main/MainPage";
-import { Registration } from "../../src/pageObjects/main/Registration";
+import { MainPage } from "../../src/pageObjects/pages/MainPage";
+import { RegistrationPopup } from "../../src/pageObjects/components/RegistrationPopup";
 
 test.describe("Registration form (POM)", () => {
     const prefix = "qauto_os";
@@ -21,7 +21,7 @@ test.describe("Registration form (POM)", () => {
         const home = new MainPage(page);
         await home.navigate();
         await home.openSignupPopup();
-        reg = new Registration(page);
+        reg = new RegistrationPopup(page);
     });
 
     test("Positive: register new user with valid data", async ({ page }) => {

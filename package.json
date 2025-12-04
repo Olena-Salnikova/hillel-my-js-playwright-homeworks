@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "npx playwright test",
+    "test-ui": "npx playwright test --ui",
     "test-report": "npx playwright show-report",
     "lint": "eslint ."
   },
@@ -28,6 +29,7 @@
     "globals": "^16.5.0"
   },
   "dependencies": {
-    "@faker-js/faker": "^10.1.0"
+    "@faker-js/faker": "^10.1.0",
+    "dotenv": "^17.2.3"
   }
 }

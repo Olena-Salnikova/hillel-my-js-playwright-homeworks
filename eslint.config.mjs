@@ -11,6 +11,11 @@ export default defineConfig([
       "semi": ["error", "always"], // Require semicolons
       "prefer-const": "error" // Prefer const when variables are not reassigned
     },
-    languageOptions: { globals: globals.browser } 
+    languageOptions: { 
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      }
+    }
   },
 ]);

@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { faker } from "@faker-js/faker";
-import { MainPage } from "../../src/pageObjects/pages/MainPage";
+import MainPage from "../../src/pageObjects/pages/MainPage";
 
 test.describe("Registration form (POM)", () => {
     const prefix = "qauto_os";

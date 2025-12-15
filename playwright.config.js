@@ -17,6 +17,8 @@ import config from './config/config';
 export default defineConfig({
   // testDir: './tests',
   testMatch: /\/tests\/HW.*\/.*\.spec\.js/,
+  globalSetup: './global-setup',
+  globalTeardown: './globalTeardown',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -47,8 +49,14 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'setup',
+      testMatch: /\/tests\/setup\/.*\.setup\.js/,
+      use: { ...devices['Desktop Chrome'] },
+    },
+    {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      dependencies: ['setup']
     },
 
     // {

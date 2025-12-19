@@ -16,7 +16,8 @@ import config from './config/config';
  */
 export default defineConfig({
   // testDir: './tests',
-  testMatch: /\/tests\/HW.*\/.*\.spec\.js/,
+  //testMatch: /\/tests\/HW.*\/.*\.spec\.js/,
+  testMatch: /\/tests\/HW29\.1\/.*\.spec\.js/,
   globalSetup: './global-setup',
   globalTeardown: './globalTeardown',
   /* Run tests in files in parallel */
@@ -35,7 +36,7 @@ export default defineConfig({
     baseURL: config.baseURL,
     httpCredentials: config.httpCredentials,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    headless: true, // false - Open browser window, if true - runs in background- not opening browser window
+    headless: false, // false - Open browser window, if true - runs in background- not opening browser window
     viewport: { width: 1280, height: 720 },
     trace: 'on',
     video: 'on',

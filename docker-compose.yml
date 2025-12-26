@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  auto-tests:
+    container_name: pw-tests
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./playwright-report:/pw-tests/playwright-report
+    environment:
+      - CI=true
+      - BASE_URL=${BASE_URL}
+      - HTTP_USERNAME=${HTTP_USERNAME}
+      - HTTP_PASSWORD=${HTTP_PASSWORD}
+      - USER_EMAIL=${USER_EMAIL}
+      - USER_PASSWORD=${USER_PASSWORD}
+    # depends_on:
+    #   - db
+
+  # db:
+  #   image: mysql
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: example
